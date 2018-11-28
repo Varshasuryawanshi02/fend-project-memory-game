@@ -1,3 +1,5 @@
+
+/*Main design is for a phone*/
 html {
     box-sizing: border-box;
 }
@@ -17,8 +19,7 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png');
-    /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -34,28 +35,27 @@ h1 {
     font-weight: 300;
 }
 
-
 /*
  * Styles for the deck of cards
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
+    width: 300px;
+    min-height: 309px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 5vh 0 3em;
+    margin: 0 0 3em;
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    height: 59px;
+    width: 59px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -68,21 +68,19 @@ h1 {
 }
 
 .deck .card.open {
-    transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
 }
 
 .deck .card.show {
-    font-size: 33px;
+    font-size: 25px;
 }
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
-    font-size: 33px;
+    font-size: 25px;
 }
-
 
 /*
  * Styles for the Score Panel
@@ -90,7 +88,7 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 545px;
+    width: 280px;
     margin-bottom: 10px;
 }
 
@@ -107,112 +105,154 @@ h1 {
 }
 
 .score-panel .restart {
-    display: inline;
+    float: right;
     cursor: pointer;
-    margin-left: 2vw;
 }
 
-svg {
-    width: 100px;
+.score-panel .timer {
+    display: inline-block;
+    padding-left: 50px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float:right;
+    vertical-align: top;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.meme {
+    height: 70%;
+    width: 70%;
     display: block;
-    margin: 25vh auto 0;
+    margin: auto;
+    padding-top: 20px;
 }
 
-.path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 0;
+.modal-text {
+    text-align:center;
 }
 
-.path.circle {
-    -webkit-animation: dash 0.9s ease-in-out;
-    animation: dash 0.9s ease-in-out;
+.buttons {
+    display: flex;
+    width:100%;
 }
 
-.path.line {
-    stroke-dashoffset: 1000;
-    -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
-    animation: dash 0.9s 0.35s ease-in-out forwards;
+.play-again-button, .done-button {
+    width:50%;
+    padding: 0 5px 0 5px;
 }
 
-.path.check {
-    stroke-dashoffset: -100;
-    -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
-    animation: dash-check 0.9s 0.35s ease-in-out forwards;
-}
-
-p {
-    text-align: center;
-    margin: 20px 0;
+.no-play, .play {
     font-size: 1.25em;
 }
 
-p.success {
-    color: #73AF55;
+.no-play {
+    float: left;
 }
 
-@-webkit-keyframes dash {
-    0% {
-        stroke-dashoffset: 1000;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes dash {
-    0% {
-        stroke-dashoffset: 1000;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
-@-webkit-keyframes dash-check {
-    0% {
-        stroke-dashoffset: -100;
-    }
-    100% {
-        stroke-dashoffset: 900;
-    }
-}
-
-@keyframes dash-check {
-    0% {
-        stroke-dashoffset: -100;
-    }
-    100% {
-        stroke-dashoffset: 900;
-    }
-}
-
-#sucess-result {
-    display: none;
-}
-
-.score-titles {
-    font-weight: 900;
-    margin-right: 5px;
-}
-
-.score-values {
-    font-weight: 100;
-    margin-right: 1vw;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.star {
-     display: inline;
-    margin: 2px;
-}
-
-.margin-top-2 {
-  margin-top: 2vh;   
-}
-
-.text-right {
+.play {
     float: right;
+}
+
+/*Properties for a tablet and desktop*/
+
+/*Starting from tablet - make the board bigger*/
+@media (min-device-width: 767px) {
+    .deck {
+        width: 660px;
+        min-height: 680px;
+        padding: 32px;
+    }
+
+    .deck .card {
+        height: 125px;
+        width: 125px; 
+    }
+
+    .deck .card.show, .deck .card.match  {
+        font-size: 33px;
+    }
+
+}
+
+/*Tablet only*/
+@media (min-device-width: 767px) and (max-device-width: 1023px) {
+    header {
+        font-size: 2em;
+    }
+
+    .score-panel {
+        width: 600px;
+        font-size: 2em;
+    }
+
+    .deck .card.show, .deck .card.match  {
+        font-size: 50px;
+    }
+
+    .modal-content {
+        font-size: 1.5em;
+    }
+
+    .no-play, .play {
+        font-size: 1.75em;
+    }
+}
+
+/*Properties for desktop*/
+@media (min-device-width: 1024px) {
+    .score-panel {
+        width: 345px;
+    }
+
+    .modal-content {
+        margin: 15% auto; /* 15% from the top and centered */
+        width: 50%; /* Could be more or less, depending on screen size */
+    }
+
+    .meme {
+        height: 50%;
+        width: 50%;
+    }
+
+    .play-again-button, .done-button {
+        padding: 0 10px 0 10px;
+    }
+
+    .no-play, .play {
+        font-size: 1.5em;
+    }
 }
