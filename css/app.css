@@ -1,4 +1,3 @@
-/*Main design is for a phone*/
 html {
     box-sizing: border-box;
 }
@@ -39,10 +38,10 @@ h1 {
  */
 
 .deck {
-    width: 300px;
-    min-height: 309px;
+    width: 660px;
+    min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 15px;
+    padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
@@ -53,8 +52,8 @@ h1 {
 }
 
 .deck .card {
-    height: 59px;
-    width: 59px;
+    height: 125px;
+    width: 125px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -66,19 +65,22 @@ h1 {
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
-.deck .card.open {
-    background: #02b3e4;
-    cursor: default;
-}
-
 .deck .card.show {
-    font-size: 25px;
+    cursor: default;
+    background: #02b3e4;;
+    font-size: 33px;
 }
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
-    font-size: 25px;
+    font-size: 33px;
+}
+
+.deck div.card.failed-match {
+    cursor: default;
+    background: #FF5555;
+    font-size: 33px;
 }
 
 /*
@@ -87,15 +89,18 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 280px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
     margin-bottom: 10px;
+    padding: 0 120px 0px;
 }
 
 .score-panel .stars {
     margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
+    padding-left: 0;
+    text-align: center;
+    flex-basis: 25%;
 }
 
 .score-panel .stars li {
@@ -103,155 +108,180 @@ h1 {
     display: inline-block;
 }
 
-.score-panel .restart {
-    float: right;
+.score-panel .restart, .score-panel .time , .score-panel .moves {
+    text-align: center;
     cursor: pointer;
+    flex-basis: 25%;
 }
 
-.score-panel .timer {
-    display: inline-block;
-    padding-left: 50px;
-}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 10% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 90%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-    color: #aaa;
-    float:right;
-    vertical-align: top;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
     cursor: pointer;
 }
 
-.meme {
-    height: 70%;
-    width: 70%;
-    display: block;
-    margin: auto;
-    padding-top: 20px;
+#win-screen {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,1);
+    z-index: 4;
+    cursor: pointer;
 }
 
-.modal-text {
-    text-align:center;
+h1.winnerHeader {
+	text-align: center;
+	margin-top: 240px;
 }
 
-.buttons {
-    display: flex;
-    width:100%;
+div.winnerMessage {
+	text-align: center;
 }
 
-.play-again-button, .done-button {
-    width:50%;
-    padding: 0 5px 0 5px;
+button.playAgainButton {
+	margin-left: 48%;
+	margin-left: 47%;
+	background-color: rgba(0, 185, 168, 1);
+	color:white;
+	border-radius:15px;
 }
 
-.no-play, .play {
-    font-size: 1.25em;
+/* entire container, keeps perspective */
+.flip-container {
+    perspective: 1000px;
+    height: 125px;
+    width: 125px;
 }
 
-.no-play {
-    float: left;
+/* flip the pane when hovered */
+.flip-container.flip .flipper {
+    transform: rotateY(180deg);
 }
 
-.play {
-    float: right;
+/* flip speed goes here */
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
 }
 
-/*Properties for a tablet and desktop*/
+/* hide back of pane during swap */
+.front, .back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
-/*Starting from tablet - make the board bigger*/
-@media (min-device-width: 767px) {
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.deck .card.back {
+    transform: rotateY(180deg);
+    font-size:33px;
+    background: #02ccba;
+}
+
+ul {
+    list-style-type: none;
+}
+
+@media screen and (max-width: 350px){
+    .score-panel {
+        font-size: 12px;
+    }
+
     .deck {
-        width: 660px;
-        min-height: 680px;
-        padding: 32px;
+        width: 250px;
+        min-height: 290px;
+        padding: 2px 4px 2px;
     }
 
-    .deck .card {
-        height: 125px;
-        width: 125px; 
+    .deck .card, .flip-container {
+        width: 55px;
+        height: 55px;
     }
-
-    .deck .card.show, .deck .card.match  {
-        font-size: 33px;
-    }
-
-}
-
-/*Tablet only*/
-@media (min-device-width: 767px) and (max-device-width: 1023px) {
-    header {
-        font-size: 2em;
+    
+    .deck .card.back {
+        font-size:20px;
     }
 
     .score-panel {
-        width: 600px;
-        font-size: 2em;
+        width: 285px;
+        padding: 0;
     }
 
-    .deck .card.show, .deck .card.match  {
-        font-size: 50px;
-    }
-
-    .modal-content {
-        font-size: 1.5em;
-    }
-
-    .no-play, .play {
-        font-size: 1.75em;
+    .deck .card.match, .deck .card.show, .deck .card.back, .deck div.card.failed-match {
+        font-size: 20px;
     }
 }
 
-/*Properties for desktop*/
-@media (min-device-width: 1024px) {
+@media screen and (min-width: 350px) and (max-width: 519px){
     .score-panel {
-        width: 345px;
+        font-size: 12px;
     }
 
-    .modal-content {
-        margin: 15% auto; /* 15% from the top and centered */
-        width: 50%; /* Could be more or less, depending on screen size */
+    .deck {
+        width: 340px;
+        min-height: 390px;
+        padding: 4px 8px 4px;
     }
 
-    .meme {
-        height: 50%;
-        width: 50%;
+    .deck .card, .flip-container {
+        width: 70px;
+        height: 70px;
     }
 
-    .play-again-button, .done-button {
-        padding: 0 10px 0 10px;
+    .deck .card.match, .deck .card.show, .deck .card.back, .deck div.card.failed-match {
+        font-size: 20px;
     }
 
-    .no-play, .play {
-        font-size: 1.5em;
+    .score-panel {
+        width: 350px;
+        padding: 0 10px 0px;
+    }
+}
+
+@media screen and (min-width: 520px) and (max-width: 699px) {
+    .deck{
+        width: 500px;
+        min-height: 570px;
+    }
+
+    .deck .card, .flip-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    .score-panel {
+        width: 450px;
+        padding: 0 10px 0px;
+    }
+}
+
+@media screen (min-width: 700px) {
+    .container {
+        width: 100%;
+    }
+    .score-panel {
+        padding: 0 60px 0px;
     }
 }
