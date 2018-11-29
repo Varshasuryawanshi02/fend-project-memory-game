@@ -4,7 +4,6 @@ This is the game based on memory or we can say it is a memory game, in this game
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [How to play](#how to play)
 * [Contributing](#contributing)
 
 ## Instructions
