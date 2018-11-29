@@ -1,20 +1,22 @@
 # Memory Game Project
+This is the game based on memory or we can say it is a memory game, in this game we have 16 square grid on which stored 8 pair of cards and for play we have to dfind the combination of card pairs.
 
 ## Table of Contents
 
 * [Instructions](#instructions)
+* [How to play](#how to play)
 * [Contributing](#contributing)
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+The starter project has some HTML and CSS styling to display a static version of the Memory Game project. i have converted this project in an interactive way.
 
-To get started, open `js/app.js` and start building out the app's functionality
+## How to play
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+To play this game you have to Download and clone this project and then open inddex.html file on your browser and then play...
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+This repository is my project, which is a part of Udacity Front End Web development nanodegree.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
